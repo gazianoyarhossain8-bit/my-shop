@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
-import ProductList from "./components/ProductList";
+import ProductList from "./components/productList";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
