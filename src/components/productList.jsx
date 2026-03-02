@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function ProductList({ setCartCount, searchTerm }) {
+function productList({ setCartCount, searchTerm }) {
   const [products, setProducts] = useState([]);
 
   // Fetch products from backend
@@ -57,4 +57,4 @@ function ProductList({ setCartCount, searchTerm }) {
   );
 }
 
-export default ProductList;
+export default productList;
