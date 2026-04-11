@@ -1,60 +1,74 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../Redux/productSlice";
+import { addToCart } from "../Redux/cartSlice";
+import { Link } from "react-router-dom";
 
-function productList({ setCartCount, searchTerm }) {
-  const [products, setProducts] = useState([]);
-
-  // Fetch products from backend
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get("http://localhost:7000/api/products");
-        setProducts(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  //  Search Filter
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+function ProductList() {
+  const dispatch = useDispatch();
+  const { items: products, loading, currentPage, totalPages } = useSelector(
+    (state) => state.products
   );
 
+  // Local page state
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(fetchProducts(page));
+  }, [page]);
+
+  if (loading) return <h1 className="text-center mt-10">Loading...</h1>;
+
   return (
-    <div className="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <>
+      <div className="max-w-7xl mx-auto p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {products.map((p) => (
+          <div key={p._id} className="border p-3 rounded-lg shadow">
+            <Link to={`/product/${p._id}`}>
+              <img
+                src={`http://localhost:7000/${p.image}`}
+                className="w-full h-40 object-cover"
+              />
+            </Link>
 
-      {filteredProducts.length === 0 ? (
-        <p>No products found</p>
-      ) : (
-        filteredProducts.map((product) => (
-          <div
-            key={product._id}
-            className="border rounded-lg p-4 shadow hover:shadow-xl transition"
-          >
-            {/* Image */}
-            <img
-              src={`http://localhost:7000/${product.image}`}
-              alt={product.name}
-              className="h-40 w-full object-cover mb-4 rounded"
-            />
-
-            <h2 className="font-semibold text-lg">{product.name}</h2>
-            <p className="text-pink-600 font-bold">₹{product.price}</p>
+            <h2 className="font-semibold mt-2"> Name:{p.name}</h2>
+            <p> Description:{p.description}</p>
+            <p className="text-gray-600">{p.price} ₹</p>
 
             <button
-              onClick={() => setCartCount((prev) => prev + 1)}
-              className="mt-3 bg-pink-600 text-white px-4 py-2 rounded w-full hover:bg-pink-700"
+              onClick={() => dispatch(addToCart(p))}
+              className="mt-2 w-full bg-blue-600 text-white py-1 rounded"
             >
               Add to Cart
             </button>
           </div>
-        ))
-      )}
-    </div>
+        ))}
+      </div>
+
+      {/* Pagination Buttons */}
+      <div className="flex justify-center gap-4 my-6">
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-40"
+        >
+          Prev
+        </button>
+
+        <span className="text-lg font-semibold">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-40"
+        >
+          Next
+        </button>
+      </div>
+    </>
   );
 }
 
-export default productList;
+export default ProductList;
