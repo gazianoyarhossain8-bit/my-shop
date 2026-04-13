@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (page,search) => {
+  async ({page,search}) => {
     const res = await axios.get(
       'http://localhost:7000/api/products',{
         params: {page, limit: 4, search}

@@ -28,6 +28,7 @@ function App() {
         <Route path="/orders" element={<Order/>}/>
         <Route path="/products" element={<ProductList/>}/>
       </Routes>
+    
       <Footer/>
       </>
     

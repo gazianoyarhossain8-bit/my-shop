@@ -7,6 +7,7 @@ import { setSearch } from "../Redux/searchSlice";
 function Header() {
   const cartCount = useSelector((state) => state.cart.items.length);
   const user = useSelector((state) => state.user);
+  const search = useSelector((state) => state.search.keyword);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,14 +18,15 @@ function Header() {
 
         <Link to="/" className="text-2xl font-bold text-blue-600">A-Shop</Link>
 
-        <div className="hidden md:block w-1/2">
+        <div className="">
           <input 
             type="text"
-            name="search"
+            value={search}
             placeholder="Search product..."
             className="w-full px-4 py-2 border rounded-lg"
             onChange={(e) => dispatch(setSearch(e.target.value))}
           />
+          {search}
         </div>
 
         <div className="flex items-center gap-6">
@@ -46,6 +48,7 @@ function Header() {
             </span>
           </Link>
         </div>
+        
       </div>
 
       <div className="px-4 pb-4 md:hidden">
