@@ -31,7 +31,7 @@ function ProductUpload() {
 
     try{
       const res = await axios.post(
-        "http://localhost:7000/api/products",
+        "https://shop-backend-mz62.onrender.com/api/products",
         formData,
         {
           headers: {
