@@ -8,7 +8,7 @@ function Order() {
 
     const getOrder = async () =>{
         try {
-            const res = await axios.get("http://localhost:7000/api/orders");
+            const res = await axios.get("https://shop-backend-mz62.onrender.com/api/orders");
             setOrder(res.data);
 
             
@@ -28,7 +28,7 @@ function Order() {
 {order.map((item) => (
   <div key={item._id}>
     <img
-      src={`http://localhost:7000/${item.productId.image}`}
+      src={`https://shop-backend-mz62.onrender.com/${item.productId.image}`}
       alt={item.productId?.name} 
       className="w-40 rounded"
     />

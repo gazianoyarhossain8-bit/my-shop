@@ -16,7 +16,7 @@ function ProductDetails() {
 
   const handleBuy = async () => {
     try {
-      const res = await axios.post("http://localhost:7000/api/orders", {
+      const res = await axios.post("https://shop-backend-mz62.onrender.com/api/orders", {
         
         productId: product._id,
         quantity: 1,

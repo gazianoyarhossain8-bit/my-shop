@@ -11,16 +11,16 @@ function ProductList() {
     (state) => state.products
   );
 
-  const search = useSelector((state) => state.search.keyword); // ✅ ADD THIS
+  const search = useSelector((state) => state.search.keyword); //  ADD THIS
 
   const [page, setPage] = useState(1);
 
-  // ✅ page + search dono bhejo
+  //  page + search dono bhejo
   useEffect(() => {
     dispatch(fetchProducts({ page, search }));
-  }, [page, search]); // ✅ dependency me search add
+  }, [page, search]); // dependency me search add
 
-  // ✅ search change ho to page reset
+  // search change ho to page reset
   useEffect(() => {
     setPage(1);
   }, [search]);
@@ -34,7 +34,7 @@ function ProductList() {
           <div key={p._id} className="border p-3 rounded-lg shadow">
             <Link to={`/product/${p._id}`}>
               <img
-                src={`http://localhost:7000/${p.image}`}
+                src={`https://shop-backend-mz62.onrender.com/${p.image}`}
                 className="w-full h-40 object-cover"
               />
             </Link>

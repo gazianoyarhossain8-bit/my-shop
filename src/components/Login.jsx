@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:7000/api/login",
+        "https://shop-backend-mz62.onrender.com/api/login",
         { email: email.trim(), password: password.trim() },
         {
           withCredentials: true,

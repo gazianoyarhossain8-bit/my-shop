@@ -6,7 +6,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async ({page,search}) => {
     const res = await axios.get(
-      'http://localhost:7000/api/products',{
+      'https://shop-backend-mz62.onrender.com/api/products',{
         params: {page, limit: 4, search}
       });
     return res.data; // totalProducts, currentPage, totalPages, products
