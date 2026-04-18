@@ -15,7 +15,7 @@ function Register() {
     const handleRegister = async(e) => {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:7000/api/register",
+            await axios.post("https://shop-backend-mz62.onrender.com/api/register",
                 {
                     name,
                     email,
