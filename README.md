@@ -11,7 +11,7 @@ React for frontend and Node.js for backend
 - e to cart
 
  ## Live Demo
-https://my-shop-sigma.vercel.app
+https://my-shop-silk-sigma.vercel.app
 
 ## GitHub
 https://github.com/gazianoyarhossain
