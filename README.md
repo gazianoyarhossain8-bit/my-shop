@@ -8,7 +8,8 @@ React for frontend and Node.js for backend
 - login
 - order
 - order views
-- e to cart
+- add to cart
+- cart views
 
  ## Live Demo
 https://my-shop-silk-sigma.vercel.app
